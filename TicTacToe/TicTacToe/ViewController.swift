@@ -6,7 +6,7 @@
 //
 
 import UIKit
-ы
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
