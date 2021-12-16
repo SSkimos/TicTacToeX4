@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  TicTacToe
-//
-//  Created by Никита Черешнев on 03.12.2021.
-//
-
 import UIKit
 
 @main
