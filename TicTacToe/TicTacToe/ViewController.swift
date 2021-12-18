@@ -1,14 +1,3 @@
-//
-//  ViewController.swift
-//  TicTacToe
-//
-//  Created by Никита Черешнев on 03.12.2021.
-//
-//TODO: удалить из памяти кнопок инфу о старой коллекции
-//TODO: понять как сделать нормально код
-//TODO: придумать как сделать двумерную матрицу экземпляров класса cell
-//TODO: придумать как связать клетку (2ную матрицу) с массивом кнопок (1мерная матрица)
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -34,58 +23,66 @@ class ViewController: UIViewController {
     private func updateViewFromModel(x: Int, y: Int) {
         for index in 0...35 {
             if ticTacToeGame.field.cells[index/6][index%6].symbol == 1 || ticTacToeGame.field.cells[index/6][index%6].symbol == -1 {
-                if var image = UIImage(named: getImageName(x: index/6, y: index%6)) {
+                if let image = UIImage(named: getImageName(x: index/6, y: index%6)) {
                     buttonFieldArray[index].setImage(image, for: .normal)
                 }
             }
         }
+        playersScore.text = "\(ticTacToeGame.field.scoreX) : \(ticTacToeGame.field.scoreO)"
     }
     
-    //функция, которая отвечает за нажатие кнопок на игровом поле №1
+    private func checkButton(x: Int, y: Int)->Bool {
+        if ticTacToeGame.field.cells[x][y].symbol == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     @IBAction func buttonFirstFieldAction(_ sender: UIButton) {
-        if flag <= 9 {
-            if let buttonIndex = buttonFieldArray.firstIndex(of: sender) {
+        if let buttonIndex = buttonFieldArray.firstIndex(of: sender) {
+            if flag < 10 && !checkButton(x: buttonIndex/6, y: buttonIndex%6) {
                 if ticTacToeGame.newSymbol(x: buttonIndex/6, y: buttonIndex%6) != false {
                     updateViewFromModel(x: buttonIndex/6, y: buttonIndex%6)
                 }
+                flag+=1
             }
-            flag+=1
         }
     }
     
     //№2
     @IBAction func buttonSecondFieldAction(_ sender: UIButton) {
-        if flag >= 10 || flag <= 17 {
-            if let buttonIndex = buttonFieldArray.firstIndex(of: sender) {
+        if let buttonIndex = buttonFieldArray.firstIndex(of: sender) {
+            if flag >= 9 && flag <= 17 && !checkButton(x: buttonIndex/6, y: buttonIndex%6) {
                 if ticTacToeGame.newSymbol(x: buttonIndex/6, y: buttonIndex%6) != false {
                     updateViewFromModel(x: buttonIndex/6, y: buttonIndex%6)
                 }
+                flag+=1
             }
-            flag+=1
         }
     }
     
     //№3
     @IBAction func buttonThirdFieldAction(_ sender: UIButton) {
-        if flag >= 18 || flag <= 26 {
-            if let buttonIndex = buttonFieldArray.firstIndex(of: sender) {
+        if let buttonIndex = buttonFieldArray.firstIndex(of: sender) {
+            if flag >= 18 && flag <= 27 && !checkButton(x: buttonIndex/6, y: buttonIndex%6) {
                 if ticTacToeGame.newSymbol(x: buttonIndex/6, y: buttonIndex%6) != false {
                     updateViewFromModel(x: buttonIndex/6, y: buttonIndex%6)
                 }
+                flag+=1
             }
-            flag+=1
         }
     }
     
     //№4
     @IBAction func buttonFourthFieldAction(_ sender: UIButton) {
-        if flag >= 27 || flag <= 35 {
-            if let buttonIndex = buttonFieldArray.firstIndex(of: sender) {
+        if let buttonIndex = buttonFieldArray.firstIndex(of: sender) {
+            if flag >= 27 && flag <= 36 && !checkButton(x: buttonIndex/6, y: buttonIndex%6) {
                 if ticTacToeGame.newSymbol(x: buttonIndex/6, y: buttonIndex%6) != false {
                     updateViewFromModel(x: buttonIndex/6, y: buttonIndex%6)
                 }
+                flag+=1
             }
-            flag+=1
         }
     }
 }
